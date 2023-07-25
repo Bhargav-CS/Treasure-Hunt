@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Round 2 - Cipher Challenge</title>
+</head>
+<body>
+    <h1>Round 2 - Cipher Challenge</h1>
+    <form id="round2Form" method="post">
+        {% csrf_token %}
+        {% for challenge in challenges %}
+        <p>
+            <strong>{{ challenge.title }}</strong><br>
+            <span>{{ challenge.description }}</span><br>
+            <span>Ciphered Text: {{ challenge.ciphered_text }}</span><br>
+            <span>Shift Key: {{ challenge.shift_key }}</span><br>
+            <input type="checkbox" id="check_{{ challenge.id }}" onclick="checkAnswer({{ challenge.id }})">
+            <label for="answer_{{ challenge.id }}">Enter your answer:</label>
+            <input type="text" id="answer_{{ challenge.id }}" name="answer_{{ challenge.id }}" required>
+            <button type="button" onclick="checkAnswer({{ challenge.id }})">Check</button>
+            <span id="result_{{ challenge.id }}"></span>
+            <br>
+        </p>
+        {% endfor %}
+        <input type="submit" value="Submit Answers">
+    </form>
+
+    <script>
+        // Define the correct answers for each challenge as a JavaScript object
+        const correctAnswers = {
+            {% for challenge in challenges %}
+                {{ challenge.id }}: "{{ challenge.solution }}",
+            {% endfor %}
+        };
+
+        function checkAnswer(challengeId) {
+            const userInput = document.querySelector(`input[name="answer_${challengeId}"]`).value;
+            const correctAnswer = correctAnswers[challengeId]; // Get the correct answer for the challenge
+
+            if (userInput.trim() === '') {
+                document.getElementById(`result_${challengeId}`).textContent = 'Please enter your answer.';
+            } else if (userInput.toLowerCase() === correctAnswer.toLowerCase()) {
+                document.getElementById(`result_${challengeId}`).textContent = 'Correct';
+            } else {
+                document.getElementById(`result_${challengeId}`).textContent = 'Incorrect answer, try again';
+            }
+        }
+    </script>
+</body>
+</html>

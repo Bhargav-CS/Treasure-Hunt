@@ -1,0 +1,31 @@
+<!-- templates/admin/submission_list.html -->
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <h1>Submissions</h1>
+  <form method="post" action="">
+    {% csrf_token %}
+    <table>
+      <thead>
+        <tr>
+          <th>Team</th>
+          <th>Code</th>
+          <th>Is Correct</th>
+          <th>Is Reviewed</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for submission in submissions %}
+          <tr>
+            <td>{{ submission.team }}</td>
+            <td>{{ submission.code }}</td>
+            <td>{{ submission.is_correct }}</td>
+            <td>{{ submission.is_reviewed }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <input type="submit" name="action" value="Mark selected as correct" />
+    <input type="submit" name="action" value="Mark selected as incorrect" />
+  </form>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Round 1 - Treasure Hunt Event</title>
+    <!-- Add your CSS files for styling here (if any) -->
+</head>
+<body>
+    <h1>Round 1 - Riddles and Puzzles</h1>
+    <form id="round1Form" method="post">
+        {% csrf_token %}
+        {% for question in questions %}
+            <p>
+                <strong>{{ question.question }}</strong><br>
+                <input type="text" name="answer_{{ forloop.counter }}" required>
+                <button type="button" onclick="checkAnswer({{ forloop.counter }})">Check</button>
+                <span id="result_{{ forloop.counter }}"></span>
+            </p>
+        {% endfor %}
+        <input type="submit" value="Submit Answers">
+    </form>
+
+
+    <script>
+        // Store the correct answers in a JavaScript object
+        const correctAnswers = {
+            {% for question in questions %}
+                {{ forloop.counter }}: "{{ question.answer }}",
+            {% endfor %}
+        };
+
+        function checkAnswer(questionId) {
+            const userInput = document.querySelector(`input[name="answer_${questionId}"]`).value;
+            const correctAnswer = correctAnswers[questionId]; // Get the correct answer for the question
+
+            if (userInput.toLowerCase() === correctAnswer.toLowerCase()) {
+                document.getElementById(`result_${questionId}`).textContent = 'Correct';
+            } else {
+                document.getElementById(`result_${questionId}`).textContent = 'Incorrect answer, try again';
+            }
+        }
+    </script>
+</body>
+</html>

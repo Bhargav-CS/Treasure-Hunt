@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Round 2 - Maze Solving</title>
+</head>
+<body>
+    <h1>Welcome to Round 2 - Maze Solving</h1>
+    <p>
+        In this round, you will need to implement a maze solving algorithm using Depth-First Search (DFS).
+        Below is an example maze and the code you need to complete.
+    </p>
+    <h2>Problem Statement</h2>
+    <p>
+        Implement the function dfs_maze_solve(maze, row, col) that takes a maze as input represented as a 2D list of characters.
+        The function should return True if it's possible to reach the end of the maze (marked as 'E') from the start (marked as 'S'),
+        otherwise return False.
+    </p>
+    <p>
+        You can copy and paste the code in your own code editor or use an online code editor like <a href="https://www.onlinegdb.com/online_python_compiler">Online Python Compiler</a>.
+    </p>
+    <h3>Example Maze:</h3>
+    <pre>
+        <!-- Display your sample maze here -->
+    </pre>
+    <h3>Starter Code:</h3>
+    <pre>
+        def dfs_maze_solve(maze, row, col):
+            # Your code here
+    </pre>
+    <form method="post" action="{% url 'submit_solution' %}">
+        {% csrf_token %}
+        <label for="team_name">Team Name:</label>
+        <input type="text" id="team_name" name="team_name" required>
+
+        <label for="participant_code">Code:</label>
+        <textarea id="participant_code" name="participant_code" required></textarea>
+
+        <input type="submit" value="Submit Solution">
+    </form>
+</body>
+</html>

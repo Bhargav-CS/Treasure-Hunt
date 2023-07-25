@@ -1,0 +1,26 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Django and Firebase Web App</title>
+    <!-- Include Firebase SDKs -->
+    <script src="{% static 'js/firebase-app.js' %}"></script>
+    <!-- Include other Firebase SDKs if required -->
+    <script src="{% static 'js/other_firebase_sdk.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+</head>
+<body>
+    <h1>Posts</h1>
+    <ul id="postList">
+        {% for post in posts %}
+            <li>
+                <strong>{{ post.title }}</strong><br>
+                {{ post.content }}<br>
+                Created at: {{ post.created_at }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'create_post' %}">Create New Post</a>
+</body>
+</html>

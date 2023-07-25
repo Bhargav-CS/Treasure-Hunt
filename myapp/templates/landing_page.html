@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Landing Page</title>
+    <!-- Add Bootstrap CDN link here -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add custom styles here if needed */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e5a1a1;
+            /* Contrast background color */
+        }
+
+        /* Customize the form style */
+        form {
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #dc6d6d;
+            /* Beige background color */
+        }
+
+        /* Customize the form text color */
+        label,
+        input,
+        textarea {
+            color: #333;
+            /* Dark color for better contrast */
+        }
+
+        /* Customize the button background color */
+        input[type="submit"] {
+            background-color: #dc3545;
+            /* Bootstrap danger color (red) */
+            border-color: #dc3545;
+            /* Set border color to match background color */
+        }
+
+        /* Media Query for Responsive Layout */
+        @media (max-width: 768px) {
+            body {
+                background-color: #e5a1a1;
+                /* Change background color on smaller devices */
+            }
+
+            form {
+                background-color: #dc6d6d;
+                /* Change form background color on smaller devices */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center">Welcome to the Maze Solver Challenge</h1>
+        <p class="text-center">Register your team below:</p>
+
+        <form method="post" class="mx-auto" id="team_form">
+            <input type="hidden" name="csrfmiddlewaretoken" id="csrf_token_input" value="">
+
+            <div class="form-group">
+                <label for="team_name">Team Name:</label>
+                <input type="text" id="team_name" name="team_name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="team_members">Team Members:</label>
+                <textarea id="team_members" name="team_members" class="form-control" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="contact_email">Contact Email:</label>
+                <input type="email" id="contact_email" name="contact_email" class="form-control" required>
+            </div>
+
+            <input type="submit" value="Register Team" class="btn btn-danger btn-block">
+        </form>
+    </div>
+
+    <!-- Add a script to set the CSRF token value -->
+    <script>
+        const csrfToken = "{{ csrf_token }}";
+        document.getElementById("csrf_token_input").value = csrfToken;
+    </script>
+</body>
+</html>
+
+
+
+

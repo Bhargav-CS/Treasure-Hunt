@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Round 2 Failed</title>
+</head>
+<body>
+    <h1>Round 2 Failed</h1>
+    {% if team.is_winner %}
+        <p>Congratulations! Your solution is correct. You are the winner!</p>
+    {% else %}
+        <p>Sorry, your solution is incorrect. Please try again!</p>
+        <a href="{% url 'round2' %}">Retry Round 2</a>
+    {% endif %}
+</body>
+</html>

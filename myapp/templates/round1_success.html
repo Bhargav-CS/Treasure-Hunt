@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Round 1 Success - Treasure Hunt Event</title>
+    <!-- Add your CSS files for styling here (if any) -->
+</head>
+<body>
+    <h1>Congratulations!</h1>
+    <p>You have completed Round 1 successfully.</p>
+
+    <!-- Form to enter the code for Round 2 -->
+    <form method="post" action="{% url 'round1_success' %}">
+        {% csrf_token %}
+        <label for="volunteer_code">Enter the code given by volunteers in the box below:</label>
+        <br>
+        <input type="text" id="volunteer_code" name="volunteer_code" required>
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+</body>
+</html>

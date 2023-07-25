@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Review</title>
+</head>
+<body>
+    <h1>Pending Submissions for Admin Review</h1>
+    {% if pending_submissions %}
+        <form method="post" action="{% url 'admin_review' %}">
+            {% csrf_token %}
+            {% for submission in pending_submissions %}
+                <p>
+                    <strong>Team Name:</strong> {{ submission.team.name }}
+                    <br>
+                    <strong>Submission Code:</strong> {{ submission.solution_code }}
+                    <br>
+                    <strong>Is Correct:</strong> {{ submission.is_correct }}
+                    <br>
+                    <input type="radio" name="response" value="correct"> Correct
+                    <input type="radio" name="response" value="incorrect"> Incorrect
+                    <input type="hidden" name="submission_id" value="{{ submission.id }}">
+                </p>
+            {% endfor %}
+            <input type="submit" value="Submit Review">
+        </form>
+    {% else %}
+        <p>No pending submissions for review.</p>
+    {% endif %}
+</body>
+</html>
